@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://entities/player/Player.gd" type="Script" id=1]
+[ext_resource path="res://assets/textures/player.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/cannon.png" type="Texture" id=3]
+[ext_resource path="res://entities/player/Cannon.gd" type="Script" id=4]
+[ext_resource path="res://entities/player/PlayerProjectile.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/fonts/game_over_font.tres" type="DynamicFont" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32.0635, 32.1654 )
+
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( -0.0635071, 0.165405 )
+script = ExtResource( 1 )
+HITS_TO_DIE = 5.0
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="Cannon" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+script = ExtResource( 4 )
+projectile_scene = ExtResource( 5 )
+
+[node name="CannonTip" type="Position2D" parent="Cannon"]
+position = Vector2( 15, 0 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 1.2, 1.2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="HitsLabel" type="Label" parent="."]
+margin_left = -55.0
+margin_top = -242.0
+margin_right = 56.0
+margin_bottom = -228.0
+custom_colors/font_color = Color( 0.94902, 0.054902, 0.054902, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Remaining hits:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameOverLabel" type="Label" parent="."]
+margin_left = -131.522
+margin_top = -161.22
+margin_right = 130.478
+margin_bottom = 165.78
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 0.964706, 0.0470588, 0.0470588, 1 )
+text = "GAME
+OVER"
+__meta__ = {
+"_edit_use_anchors_": false
+}
